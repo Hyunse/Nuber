@@ -4,8 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "cd src && nodemon --exec ts-node index.ts -e ts,graphql"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.4",
+    "@types/helmet": "^0.0.38",
+    "@types/morgan": "^1.7.35",
+    "@types/node": "^10.7.1",
+    "nodemon": "^1.18.3",
+    "ts-node": "^7.0.1",
+    "tslint-config-prettier": "^1.15.0",
+    "typescript": "^3.0.1"
+  },
+  "dependencies": {
+    "cors": "^2.8.4",
+    "graphql-tools": "^3.1.1",
+    "graphql-yoga": "^1.16.1",
+    "helmet": "^3.13.0",
+    "merge-graphql-schemas": "^1.5.3",
+    "morgan": "^1.9.0"
+  }
 }
