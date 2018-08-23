@@ -9,7 +9,7 @@ const connectionOptions : ConnectionOptions = {
   host: process.env.DB_ENDPOINT || 'localhost',
   port: 5432,
   username: process.env.DB_USERNAME || 'postgres',
-  password: process.env.DB_PASSWORD || 'mypostgres'
+  password: process.env.DB_PASSWORD
 };
 
 export default connectionOptions;
