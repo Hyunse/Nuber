@@ -1,7 +1,7 @@
 type Place {
   id: Int!
   name: String!
-  lat: Flaot!
+  lat: Float!
   lng: Float!
   address: String!
   isFav: Boolean!
