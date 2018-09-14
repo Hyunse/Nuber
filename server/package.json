@@ -17,6 +17,7 @@
     "@types/helmet": "^0.0.38",
     "@types/morgan": "^1.7.35",
     "@types/node": "^10.7.1",
+    "@types/twilio": "^0.0.9",
     "nodemon": "^1.18.3",
     "ts-node": "^7.0.1",
     "tslint-config-prettier": "^1.15.0",
@@ -36,6 +37,7 @@
     "merge-graphql-schemas": "^1.5.3",
     "morgan": "^1.9.0",
     "pg": "^7.4.3",
+    "twilio": "^3.19.2",
     "typeorm": "^0.2.7"
   }
 }
