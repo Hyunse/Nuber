@@ -44,14 +44,21 @@ type Ride {
   updateAt: String
 }
 
-type FaceBookConnectResponse {
+type EmailSignInResponse {
   ok: Boolean!
   error: String
   token: String
 }
 
 type Mutation {
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse!
   FaceBookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FaceBookConnectResponse!
+}
+
+type FaceBookConnectResponse {
+  ok: Boolean!
+  error: String
+  token: String
 }
 
 type User {
