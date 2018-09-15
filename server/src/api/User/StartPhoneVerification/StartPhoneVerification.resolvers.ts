@@ -30,7 +30,6 @@ const resolvers: Resolvers = {
           target: 'PHONE'
         }).save();
 
-        console.log(newVerification);
         // Send SMS
         await sendVerificationSMS(newVerification.payload, newVerification.key);
 

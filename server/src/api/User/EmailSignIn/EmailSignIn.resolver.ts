@@ -4,6 +4,7 @@ import {
   EmailSignInResponse
 } from '../../../types/graph';
 import User from '../../../entities/User';
+import createJWT from '../../../utils/createJWT';
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -20,17 +21,21 @@ const resolvers: Resolvers = {
           return {
             ok: false,
             error: 'No User with that email',
-            token: 'Comming soon'
+            token: null
           };
         }
 
         const checkPassword = await user.comparePassword(password);
 
         if(checkPassword) {
+          // Create JWT
+          const token = createJWT(user.id);
+          
+          // Return Success
           return {
             ok: true,
             error: null,
-            token: 'Comming soon'
+            token
           }
         } else {
           return {

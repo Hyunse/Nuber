@@ -4,6 +4,7 @@ import {
   FaceBookConnectResponse
 } from '../../../types/graph';
 import User from '../../../entities/User';
+import createJWT from '../../../utils/createJWT';
 
 /**
  * Resolvers
@@ -22,13 +23,18 @@ const resolvers: Resolvers = {
 
         // Is First To Register?
         if (existingUser) {
+          // Create JWT
+          const token = createJWT(existingUser.id);
+
+          // Return Success
           return {
             ok: true,
             error: null,
-            token: 'Comming soon already exist'
+            token
           };
         }
       } catch (error) {
+        // Return Error
         return {
           ok: false,
           error: error.message,
@@ -39,17 +45,22 @@ const resolvers: Resolvers = {
       // Register New User
       try {
         // Create User in DB
-        await User.create({
+        const newUser = await User.create({
           ...args,
           profilePhoto: `http://graph.facebook.com/${fbId}/picture?type=square`
         }).save();
 
+        // Create JWT
+        const token = createJWT(newUser.id);
+
+        // Return Success
         return {
           ok: true,
           error: null,
-          token: 'Coming soon. Created'
+          token
         };
       } catch (error) {
+        // Return Error
         return {
           ok: false,
           error: error.message,
