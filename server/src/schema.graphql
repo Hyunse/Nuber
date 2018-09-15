@@ -53,7 +53,7 @@ type CompletePhoneVerificationResponse {
 type Mutation {
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
-  EmailSignUp(firstName: String!, lastName: String!, email: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!
+  EmailSignUp(firstName: String!, lastName: String!, email: String!, profilePhoto: String!, age: Int!, phoneNumber: String!, password: String!): EmailSignUpResponse!
   FaceBookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FaceBookConnectResponse!
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
 }
