@@ -5,6 +5,8 @@ import {
 } from '../../../types/graph';
 import User from '../../../entities/User';
 import createJWT from '../../../utils/createJWT';
+import Verification from '../../../entities/Verification';
+import { sendVerificationEmail } from '../../../utils/sendEmail';
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -17,20 +19,45 @@ const resolvers: Resolvers = {
       try {
         const existingUser = await User.findOne({ email });
 
-        if( existingUser ) {
+        if (existingUser) {
           return {
             ok: false,
             error: 'You should log in instead',
             token: null
-          }
+          };
         } else {
-          const newUser = await User.create({ ...args }).save();
-          const token = createJWT(newUser.id);
+          const phoneVerification = await Verification.findOne({
+            payload: args.phoneNumber,
+            verified: true
+          });
 
-          return {
-            ok: true,
-            error: null,
-            token
+          // PhoneVerification Success
+          if (phoneVerification) {
+            const newUser = await User.create({ ...args }).save();
+            const token = createJWT(newUser.id);
+
+            // S - Email Verification
+            const emailVerification = await Verification.create({
+              payload: `${newUser.email}`,
+              target: 'EMAIL'
+            });
+            await sendVerificationEmail(
+              newUser.fullName,
+              emailVerification.key
+            );
+            // E - Email Verification
+
+            return {
+              ok: true,
+              error: null,
+              token
+            };
+          } else {
+            return {
+              ok: false,
+              error: "You haven't verified your phone number",
+              token: null
+            };
           }
         }
       } catch (error) {
