@@ -8,7 +8,9 @@ import createJWT from '../../../utils/createJWT';
 
 /**
  * Resolvers
+ *
  * FaceBookConnect
+ * @desc SignIn or SignUp By Facebook ID
  */
 const resolvers: Resolvers = {
   Mutation: {
@@ -18,11 +20,12 @@ const resolvers: Resolvers = {
     ): Promise<FaceBookConnectResponse> => {
       const { fbId } = args;
       try {
-        // Find User in DB
+        // Find User By Facebook ID
         const existingUser = await User.findOne({ fbId });
 
-        // Is First To Register?
         if (existingUser) {
+          // Exist User
+
           // Create JWT
           const token = createJWT(existingUser.id);
 
@@ -42,9 +45,9 @@ const resolvers: Resolvers = {
         };
       }
 
-      // Register New User
+      // No Exist User -> Register New USer
       try {
-        // Create User in DB
+        // Create New User
         const newUser = await User.create({
           ...args,
           profilePhoto: `http://graph.facebook.com/${fbId}/picture?type=square`
@@ -53,14 +56,13 @@ const resolvers: Resolvers = {
         // Create JWT
         const token = createJWT(newUser.id);
 
-        // Return Success
+        // Return JWT
         return {
           ok: true,
           error: null,
           token
         };
       } catch (error) {
-        // Return Error
         return {
           ok: false,
           error: error.message,

@@ -6,6 +6,12 @@ import {
 import User from '../../../entities/User';
 import createJWT from '../../../utils/createJWT';
 
+/**
+ * Resolvers
+ * 
+ * EmailSignIn
+ * @desc Sign in by Eamil
+ */
 const resolvers: Resolvers = {
   Mutation: {
     EmailSignIn: async (
@@ -15,8 +21,10 @@ const resolvers: Resolvers = {
       const { email, password } = args;
 
       try {
+        // Find User By Email
         const user = await User.findOne({ email });
 
+        // User doesn't exist
         if (!user) {
           return {
             ok: false,
@@ -25,13 +33,14 @@ const resolvers: Resolvers = {
           };
         }
 
+        // Check Password
         const checkPassword = await user.comparePassword(password);
 
         if(checkPassword) {
           // Create JWT
           const token = createJWT(user.id);
           
-          // Return Success
+          // Return JWT
           return {
             ok: true,
             error: null,

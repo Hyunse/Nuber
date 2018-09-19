@@ -6,6 +6,11 @@ import {
 import Verification from '../../../entities/Verification';
 import { sendVerificationSMS } from '../../../utils/sendSMS';
 
+/**
+ * Resovlers
+ *
+ * @desc Send SMS For Phone Verfication
+ */
 const resolvers: Resolvers = {
   Mutation: {
     StartPhoneVerification: async (
@@ -14,23 +19,25 @@ const resolvers: Resolvers = {
     ): Promise<StartPhoneVerificationResponse> => {
       // PhoneNumber is a number that we get from client
       const { phoneNumber } = args;
-      
+
       try {
-        // Find PhoneNumber 
+        // Find Verification By Phonenumber
         const existingVerfication = await Verification.findOne({
           payload: phoneNumber
         });
 
+        // If Existing Verification
         if (existingVerfication) {
           existingVerfication.remove();
         }
 
+        // Create New Verification By Phonenumber
         const newVerification = await Verification.create({
           payload: phoneNumber,
           target: 'PHONE'
         }).save();
 
-        // Send SMS
+        // Send Verification SMS
         await sendVerificationSMS(newVerification.payload, newVerification.key);
 
         // Return

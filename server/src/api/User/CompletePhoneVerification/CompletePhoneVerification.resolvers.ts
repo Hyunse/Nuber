@@ -7,6 +7,12 @@ import Verification from '../../../entities/Verification';
 import User from '../../../entities/User';
 import createJWT from '../../../utils/createJWT';
 
+/**
+ * Resolvers
+ * 
+ * Complete Phone Verification
+ * @desc Complete Phone Verification
+ */
 const resolvers: Resolvers = {
   Mutation: {
     CompletePhoneVerification: async (
@@ -16,11 +22,13 @@ const resolvers: Resolvers = {
       const { phoneNumber, key } = args;
 
       try {
+        // Find Phonenumber
         const verification = await Verification.findOne({
           payload: phoneNumber,
           key
         });
 
+        // No Exist
         if (!verification) {
           return {
             ok: false,
@@ -36,15 +44,19 @@ const resolvers: Resolvers = {
         };
       }
 
+      // Exist Phonenumber
       try {
+        // Find User By Phonenumber
         const user = await User.findOne({ phoneNumber });
 
         if (user) {
           user.verifiedPhoneNumber = true;
           user.save();
           
+          // Create JWT
           const token = createJWT(user.id);
 
+          // Return JWT
           return {
             ok: true,
             error: null,

@@ -1,6 +1,7 @@
 /**
  * Private Resolver
- * Check context.req.user
+ * 
+ * @desc Check Json Web Token Before 
  */
 const privateResolver = (resolverFunction) => async (
   parent,
