@@ -6,10 +6,13 @@ import {
   UpdateDateColumn,
   OneToMany
 } from 'typeorm';
-
 import Message from './Message';
 import User from './User';
 
+/**
+ * Chat Entity
+ * @class
+ */
 @Entity()
 class Chat extends BaseEntity {
   @PrimaryGeneratedColumn()

@@ -8,9 +8,12 @@ import {
   ManyToOne
 } from 'typeorm';
 import { rideStatus } from '../types/types';
-
 import User from './User';
 
+/**
+ * Place
+ * @class
+ */
 @Entity()
 class Place extends BaseEntity {
   @PrimaryGeneratedColumn()

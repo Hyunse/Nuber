@@ -9,9 +9,14 @@ import {
 } from 'typeorm';
 import { verificationTarget } from '../types/types';
 
+// Constant
 const PHONE = 'PHONE';
 const EMAIL = 'EMAIL';
 
+/**
+ * Verification
+ * @class
+ */
 @Entity()
 class Verification extends BaseEntity {
   @PrimaryGeneratedColumn()

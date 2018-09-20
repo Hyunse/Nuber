@@ -12,13 +12,17 @@ import {
   ManyToOne,
   OneToMany
 } from 'typeorm';
-
 import Chat from './Chat';
 import Message from './Message';
 import Ride from './Ride';
 
+// Constant
 const BCRYPT_ROUNS = 10;
 
+/**
+ * User
+ * @class
+ */
 @Entity()
 class User extends BaseEntity {
   @PrimaryGeneratedColumn()

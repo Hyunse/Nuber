@@ -7,10 +7,13 @@ import {
   UpdateDateColumn,
   ManyToOne
 } from 'typeorm';
-
 import Chat from './Chat';
 import User from './User';
 
+/**
+ * Message
+ * @class
+ */
 @Entity()
 class Message extends BaseEntity {
   @PrimaryGeneratedColumn()

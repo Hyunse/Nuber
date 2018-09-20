@@ -7,6 +7,10 @@ import {
   UpdateDateColumn
 } from 'typeorm';
 
+/**
+ * Place
+ * @class
+ */
 @Entity()
 class Place extends BaseEntity {
   @PrimaryGeneratedColumn()
