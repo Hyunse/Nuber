@@ -9,7 +9,7 @@ import createJWT from '../../../utils/createJWT';
 
 /**
  * Resolvers
- * 
+ *
  * Complete Phone Verification
  * @desc Complete Phone Verification
  */
@@ -35,6 +35,10 @@ const resolvers: Resolvers = {
             error: 'Verification key no valid',
             token: null
           };
+        } else {
+          // Phone Verification Success & Save
+          verification.verified = true;
+          verification.save();
         }
       } catch (error) {
         return {
@@ -52,7 +56,7 @@ const resolvers: Resolvers = {
         if (user) {
           user.verifiedPhoneNumber = true;
           user.save();
-          
+
           // Create JWT
           const token = createJWT(user.id);
 
@@ -63,7 +67,7 @@ const resolvers: Resolvers = {
             token
           };
         } else {
-          // Verificated number But User doen't exit
+          // Verificated number But User doesn't exit
           return {
             ok: true,
             error: null,

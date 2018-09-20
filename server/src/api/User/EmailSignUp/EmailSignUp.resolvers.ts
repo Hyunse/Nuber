@@ -35,26 +35,23 @@ const resolvers: Resolvers = {
           };
         } else {
           // No Exist User
-          
+
           // Verify Phonenumber
           const phoneVerification = await Verification.findOne({
             payload: args.phoneNumber,
             verified: true
           });
-
           if (phoneVerification) {
             // PhoneVerification == True
             // Create New User
             const newUser = await User.create({ ...args }).save();
-            // Create JWT
-            const token = createJWT(newUser.id);
-
+            
             // S - Email Verification
             // Verify Eamil
             const emailVerification = await Verification.create({
               payload: `${newUser.email}`,
               target: 'EMAIL'
-            });
+            }).save();
 
             // Send Email
             await sendVerificationEmail(
@@ -62,6 +59,9 @@ const resolvers: Resolvers = {
               emailVerification.key
             );
             // E - Email Verification
+
+            // Create JWT
+            const token = createJWT(newUser.id);
 
             // Return JWT
             return {

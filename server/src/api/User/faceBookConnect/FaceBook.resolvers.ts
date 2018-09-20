@@ -22,7 +22,7 @@ const resolvers: Resolvers = {
       try {
         // Find User By Facebook ID
         const existingUser = await User.findOne({ fbId });
-
+        console.log(args);
         if (existingUser) {
           // Exist User
 
@@ -45,6 +45,7 @@ const resolvers: Resolvers = {
         };
       }
 
+      console.log(args);
       // No Exist User -> Register New USer
       try {
         // Create New User
