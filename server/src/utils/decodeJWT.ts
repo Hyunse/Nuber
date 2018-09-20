@@ -1,6 +1,11 @@
 import jwt from 'jsonwebtoken';
 import User from '../entities/User';
 
+/**
+ * Decode JWT
+ * @param {string} token
+ * @return {User} user
+ */
 const decodeJWT = async (token: string): Promise<User | undefined> => {
   try {
     const decoded: any = jwt.verify(token, `${process.env.JWT_TOKEN}`);

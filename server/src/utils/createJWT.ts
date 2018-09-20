@@ -2,7 +2,8 @@ import jwt from 'jsonwebtoken';
 
 /**
  * Create Json Web Token
- * @param id 
+ * @param {number} id
+ * @return {Object} token
  */
 const createJWT = (id: number): string => {
   const token = jwt.sign(

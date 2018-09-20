@@ -1,3 +1,4 @@
+// .env file
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -10,6 +11,7 @@ const PORT : number | string =  process.env.PORT || 4000;
 const PLAYGROUND_ENDPOINT : string = '/playground';
 const GRAPHQL_ENDPOINT : string = '/graphql';
 
+// App Option
 const appOption: Options = {
   port: PORT,
   playground: PLAYGROUND_ENDPOINT,
@@ -18,6 +20,7 @@ const appOption: Options = {
 
 const handleAppStart = () => console.log(`Listening on ${PORT}`);
 
+// Connect Typeorm And then App Start
 createConnection(connectionOptions).then(() => {
   app.start(appOption, handleAppStart);
 }).catch(error =>  console.log(error));
