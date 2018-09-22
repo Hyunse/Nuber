@@ -13,50 +13,52 @@ import { RequestEmailVerificationResponse } from '../../../types/graph';
  */
 const resolvers: Resolvers = {
   Mutation: {
-    RequestEmailVerification: privateResolver(async (_, __, { req }) : Promise<RequestEmailVerificationResponse> => {
-      const user: User = req.user;
-      const email = `${user.email}`;
+    RequestEmailVerification: privateResolver(
+      async (_, __, { req }): Promise<RequestEmailVerificationResponse> => {
+        const user: User = req.user;
+        const email = `${user.email}`;
 
-      // No Eamil
-      if (!email) {
-        return {
-          ok: false,
-          error: 'Your user has no eamil to verify'
-        };
-      }
-
-      try {
-        // Find Old Verification By Eamil
-        const oldVerification = await Verification.findOne({
-          payload: email
-        });
-        
-        // Remove Old Verification
-        if(oldVerification) {
-          oldVerification.remove();
+        // No Eamil || Aleardy Verify Eamil
+        if (!email || user.verifiedEmail) {
+          return {
+            ok: false,
+            error: 'Your user has no eamil to verify'
+          };
         }
 
-        // Create & Save New Verification
-        const newVerification = await Verification.create({
-          payload: email,
-          target: 'EMAIL'
-        }).save();
+        try {
+          // Find Old Verification By Eamil
+          const oldVerification = await Verification.findOne({
+            payload: email
+          });
 
-        // Send Email
-        await sendVerificationEmail(user.fullName, newVerification.key);
+          // Remove Old Verification
+          if (oldVerification) {
+            oldVerification.remove();
+          }
 
-        // Return
-        return {
-          ok: true,
-          error: null
-        };
-      } catch (error) {
-        return {
-          ok: false,
-          error: error.message
-        };
+          // Create & Save New Verification
+          const newVerification = await Verification.create({
+            payload: email,
+            target: 'EMAIL'
+          }).save();
+
+          // Send Email
+          await sendVerificationEmail(user.fullName, newVerification.key);
+
+          // Return
+          return {
+            ok: true,
+            error: null
+          };
+        } catch (error) {
+          return {
+            ok: false,
+            error: error.message
+          };
+        }
       }
-    })
+    )
   }
 };
 
