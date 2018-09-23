@@ -1,33 +1,26 @@
 import { Resolvers } from '../../../types/resolvers';
 import privateResolver from '../../../utils/privateResolver';
 import {
-  UpdateMyProfileMutationArgs,
-  UpdateMyProfileResponse
+  ReportMovementMutationArgs,
+  ReportMovementResponse
 } from '../../../types/graph';
-import User from '../../../entities/User';
 import cleanNullArgs from '../../../utils/clearnNullArg';
+import User from '../../../entities/User';
 
 const resolvers: Resolvers = {
   Mutation: {
-    UpdateMyProfile: privateResolver(
+    ReportMovement: privateResolver(
       async (
         _,
-        args: UpdateMyProfileMutationArgs,
+        args: ReportMovementMutationArgs,
         { req }
-      ): Promise<UpdateMyProfileResponse> => {
+      ): Promise<ReportMovementResponse> => {
         const user: User = req.user;
-        // Check null variable
         const notNull: any = cleanNullArgs(args);
-
-        // Update Password
-        if (notNull.password !== null) {
-          user.password = notNull.password;
-          user.save();
-          delete notNull.password;
-        }
 
         try {
           await User.update({ id: user.id }, { ...notNull });
+          
           return {
             ok: true,
             error: null
