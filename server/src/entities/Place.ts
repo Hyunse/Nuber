@@ -4,8 +4,10 @@ import {
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  ManyToOne
 } from 'typeorm';
+import User from './User';
 
 /**
  * Place
@@ -16,7 +18,7 @@ class Place extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'text'})
+  @Column({ type: 'text' })
   name: string;
 
   @Column({ type: 'double precision', default: 0 })
@@ -24,12 +26,21 @@ class Place extends BaseEntity {
 
   @Column({ type: 'double precision', default: 0 })
   lng: number;
-  
-  @Column({ type: 'text'})
+
+  @Column({ type: 'text' })
   address: string;
-  
+
   @Column({ type: 'boolean', default: false })
   isFav: boolean;
+
+  /**
+   * Get User Id from User
+   */
+  @Column({ nullable: true })
+  userId: number;
+
+  @ManyToOne((type) => User, (user) => user.places)
+  user: User;
 
   @CreateDateColumn()
   createdAt: string;

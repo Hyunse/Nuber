@@ -11,11 +11,11 @@ import { rideStatus } from '../types/types';
 import User from './User';
 
 /**
- * Place
+ * Ride
  * @class
  */
 @Entity()
-class Place extends BaseEntity {
+class Ride extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
