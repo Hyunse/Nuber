@@ -1,7 +1,12 @@
 type Chat {
   id: Int!
-  messages: [Message]!
-  participants: [User]!
+  messages: [Message]
+  passengerId: Int!
+  passenger: User!
+  driverId: Int
+  driver: User!
+  rideId: Int
+  ride: Ride!
   createdAt: String!
   updatedAt: String
 }
@@ -9,6 +14,7 @@ type Chat {
 type Message {
   id: Int!
   text: String!
+  chatId: Int
   chat: Chat!
   user: User!
   createdAt: String!
@@ -22,6 +28,7 @@ type AddPlaceResponse {
 
 type Mutation {
   AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
+  DeletePlace(placeId: Int!): DeletePlaceResponse!
   EditPlace(placeId: Int!, name: String, isFav: Boolean): EditPlaceResponse!
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
@@ -35,9 +42,25 @@ type Mutation {
   UpdateMyProfile(firstName: String, lastName: String, email: String, password: String, profilePhoto: String, age: Int): UpdateMyProfileResponse!
 }
 
+type DeletePlaceResponse {
+  ok: Boolean!
+  error: String
+}
+
 type EditPlaceResponse {
   ok: Boolean!
   error: String
+}
+
+type GetMyPlacesResponse {
+  ok: Boolean!
+  error: String
+  places: [Place]
+}
+
+type Query {
+  GetMyPlaces: GetMyPlacesResponse!
+  GetMyProfile: GetMyProfileResponse!
 }
 
 type Place {
@@ -63,12 +86,16 @@ type Ride {
   dropOffLat: Float!
   dropOffLng: Float!
   price: Float!
-  duration: String!
   distance: String!
+  duration: String!
+  driverId: Int
   driver: User!
+  passengerId: Int!
   passenger: User!
+  chat: Chat
+  chatId: Int
   createdAt: String!
-  updateAt: String
+  updatedAt: String
 }
 
 type CompleteEmailVerificationResponse {
@@ -106,11 +133,6 @@ type GetMyProfileResponse {
   user: User
 }
 
-type Query {
-  GetMyProfile: GetMyProfileResponse!
-  user: User
-}
-
 type ReportMovementResponse {
   ok: Boolean!
   error: String
@@ -123,28 +145,29 @@ type RequestEmailVerificationResponse {
 
 type User {
   id: Int!
-  email: String!
+  email: String
+  verifiedEmail: Boolean!
   firstName: String!
   lastName: String!
   age: Int
   password: String
-  verifiedEmail: Boolean!
   phoneNumber: String
-  verfiedPhoneNumber: Boolean!
+  verifiedPhoneNumber: Boolean!
   profilePhoto: String
   fullName: String
   isDriving: Boolean!
   isRiding: Boolean!
   isTaken: Boolean!
-  lastLng: Float!
-  lastLat: Float!
+  lastLng: Float
+  lastLat: Float
   lastOrientation: Float
-  chat: Chat
+  fbId: String
   messages: [Message]
   ridesAsPassenger: [Ride]
   ridesAsDriver: [Ride]
+  chatsAsDriver: [Chat]
+  chatsAsPassenger: [Chat]
   places: [Place]
-  fbId: String
   createdAt: String!
   updatedAt: String
 }

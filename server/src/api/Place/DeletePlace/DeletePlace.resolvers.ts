@@ -1,30 +1,28 @@
 import { Resolvers } from '../../../types/resolvers';
 import privateResolver from '../../../utils/privateResolver';
 import {
-  User,
-  EditPlaceMutationArgs,
-  EditPlaceResponse
+  DeletePlaceMutationArgs,
+  DeletePlaceResponse,
+  User
 } from '../../../types/graph';
 import Place from '../../../entities/Place';
-import cleanNullArgs from '../../../utils/clearnNullArg';
 
 const resolvers: Resolvers = {
   Mutation: {
-    EditPlace: privateResolver(
+    DeletePlace: privateResolver(
       async (
         _,
-        args: EditPlaceMutationArgs,
+        args: DeletePlaceMutationArgs,
         { req }
-      ): Promise<EditPlaceResponse> => {
+      ): Promise<DeletePlaceResponse> => {
         const user: User = req.user;
+
         try {
           const place = await Place.findOne({ id: args.placeId });
 
           if (place) {
             if (place.userId === user.id) {
-              const notNull = cleanNullArgs(args);
-
-              await Place.update({ id: args.placeId }, { ...notNull });
+              place.remove();
 
               return {
                 ok: true,
@@ -39,7 +37,7 @@ const resolvers: Resolvers = {
           } else {
             return {
               ok: false,
-              error: 'Place not found'
+              error: 'Not Authorized'
             };
           }
         } catch (error) {

@@ -46,7 +46,7 @@ class Place extends BaseEntity {
   createdAt: string;
 
   @UpdateDateColumn()
-  updateAt: string;
+  updatedAt: string;
 }
 
 export default Place;
