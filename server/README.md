@@ -22,12 +22,12 @@ Server for the (N)Uber Clone Course on Nomad Academy. GraphQL, Typescript, NodeJ
 ### Private Resolvers:
 
 - [x] Verify Email
-- [ ] Request Email Verification
-- [ ] Complete Email Verification
-- [ ] Get my Profile
-- [ ] Update my Profile
-- [ ] Toggle Driving Mode
-- [ ] Delete Place
+- [x] Request Email Verification
+- [x] Complete Email Verification
+- [x] Get my Profile
+- [x] Update my Profile
+- [x] Toggle Driving Mode
+- [x] Delete Place
 - [ ] See Nearby Drivers
 - [ ] Subscribe to Nearby Drivers
 - [ ] Request a Ride
