@@ -11,7 +11,7 @@ import createJWT from '../../../utils/createJWT';
  * Resolvers
  *
  * Complete Phone Verification
- * @desc Complete Phone Verification
+ * @desc Check verifed key from Phone
  */
 const resolvers: Resolvers = {
   Mutation: {

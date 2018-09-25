@@ -13,6 +13,11 @@ import { rideStatus } from "../types/types";
 import Chat from "./Chat";
 import User from "./User";
 
+/**
+ * Ride
+ * 
+ * @class
+ */
 @Entity()
 class Ride extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;

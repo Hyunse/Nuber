@@ -8,7 +8,7 @@ import { RequestEmailVerificationResponse } from '../../../types/graph';
 /**
  * Resolvers
  *
- * Request Email Verification
+ * RequestEmailVerification
  * @desc Send Verification Email
  */
 const resolvers: Resolvers = {

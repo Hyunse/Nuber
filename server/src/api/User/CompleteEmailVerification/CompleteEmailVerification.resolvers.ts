@@ -7,6 +7,12 @@ import {
 } from '../../../types/graph';
 import Verification from '../../../entities/Verification';
 
+/**
+ * Resolvers
+ *
+ * CompleteEmailVerification
+ * @desc Check verified key from Email
+ */
 const resolvers: Resolvers = {
   Mutation: {
     CompleteEmailVerification: privateResolver(

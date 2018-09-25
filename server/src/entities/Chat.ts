@@ -14,6 +14,11 @@ import Message from "./Message";
 import Ride from "./Ride";
 import User from "./User";
 
+/**
+ * Chat Entity
+ * 
+ * @class
+ */
 @Entity()
 class Chat extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;

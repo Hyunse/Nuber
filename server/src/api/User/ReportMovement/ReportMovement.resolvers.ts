@@ -7,6 +7,12 @@ import {
 import cleanNullArgs from '../../../utils/clearnNullArg';
 import User from '../../../entities/User';
 
+/**
+ * Resolvers
+ * 
+ * ReportMovement
+ * @desc
+ */
 const resolvers: Resolvers = {
   Mutation: {
     ReportMovement: privateResolver(

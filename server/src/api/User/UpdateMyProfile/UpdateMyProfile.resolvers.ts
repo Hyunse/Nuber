@@ -7,6 +7,12 @@ import {
 import User from '../../../entities/User';
 import cleanNullArgs from '../../../utils/clearnNullArg';
 
+/**
+ * Resolvers
+ * 
+ * UpdateMyProfile
+ * @desc Update My Profile
+ */
 const resolvers: Resolvers = {
   Mutation: {
     UpdateMyProfile: privateResolver(

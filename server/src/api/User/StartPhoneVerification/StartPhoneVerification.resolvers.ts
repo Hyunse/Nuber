@@ -9,6 +9,7 @@ import { sendVerificationSMS } from '../../../utils/sendSMS';
 /**
  * Resovlers
  *
+ * StartPhoneVerification
  * @desc Send SMS For Phone Verfication
  */
 const resolvers: Resolvers = {

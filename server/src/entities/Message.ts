@@ -11,6 +11,11 @@ import {
 import Chat from './Chat';
 import User from './User';
 
+/**
+ * Message Entity
+ * 
+ * @class
+ */
 @Entity()
 class Message extends BaseEntity {
   @PrimaryGeneratedColumn()

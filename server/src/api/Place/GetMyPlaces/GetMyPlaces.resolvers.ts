@@ -3,6 +3,12 @@ import { GetMyPlacesResponse } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
 import privateResolver from '../../../utils/privateResolver';
 
+/**
+ * Resolvers
+ *
+ * GetMyPlaces
+ * @desc Get My Places
+ */
 const resolvers: Resolvers = {
   Query: {
     GetMyPlaces: privateResolver(

@@ -8,6 +8,12 @@ import {
 import Place from '../../../entities/Place';
 import cleanNullArgs from '../../../utils/clearnNullArg';
 
+/**
+ * Resolvers
+ *
+ * EditPlace
+ * @desc Edit Place
+ */
 const resolvers: Resolvers = {
   Mutation: {
     EditPlace: privateResolver(

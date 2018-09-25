@@ -3,6 +3,12 @@ import privateResolver from '../../../utils/privateResolver';
 import User from '../../../entities/User';
 import { ToggleDrivingModeResponse } from '../../../types/graph';
 
+/**
+ * Resolvers
+ * 
+ * ToggleDrivingMode
+ * @desc Change user.isDriving true or false
+ */
 const resolvers: Resolvers = {
   Mutation: {
     ToggleDrivingMode: privateResolver(

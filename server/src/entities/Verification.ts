@@ -14,7 +14,8 @@ const PHONE = 'PHONE';
 const EMAIL = 'EMAIL';
 
 /**
- * Verification
+ * Verification Entity
+ * 
  * @class
  */
 @Entity()

@@ -10,7 +10,8 @@ import {
 import User from './User';
 
 /**
- * Place
+ * Place Entity
+ * 
  * @class
  */
 @Entity()

@@ -7,6 +7,12 @@ import {
 } from '../../../types/graph';
 import Place from '../../../entities/Place';
 
+/**
+ * Resolvers
+ *
+ * DeletePlace
+ * @desc Delete Place
+ */
 const resolvers: Resolvers = {
   Mutation: {
     DeletePlace: privateResolver(

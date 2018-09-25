@@ -4,6 +4,12 @@ import { AddPlaceMutationArgs, AddPlaceResponse } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
 import privateResolver from '../../../utils/privateResolver';
 
+/**
+ * Resolvers
+ *
+ * AddPlace
+ * @desc Add Place
+ */
 const resolvers: Resolvers = {
   Mutation: {
     AddPlace: privateResolver(
