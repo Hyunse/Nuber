@@ -9,7 +9,7 @@ import User from '../../../entities/User';
 
 /**
  * Resolvers
- * 
+ *
  * ReportMovement
  * @desc
  */
@@ -19,7 +19,7 @@ const resolvers: Resolvers = {
       async (
         _,
         args: ReportMovementMutationArgs,
-        { req }
+        { req, pubSub }
       ): Promise<ReportMovementResponse> => {
         const user: User = req.user;
         const notNull: any = cleanNullArgs(args);
@@ -27,6 +27,9 @@ const resolvers: Resolvers = {
         try {
           await User.update({ id: user.id }, { ...notNull });
           
+          // Publish Driver info
+          pubSub.publish('driverUpdate', { DriversSubscription: user });
+
           return {
             ok: true,
             error: null
