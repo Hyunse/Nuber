@@ -10,7 +10,7 @@ class App {
   public app: GraphQLServer;
   public pubSub: any;
   constructor() {
-    // Subscribtion Server from Graphql-yoga 
+    // Subscribtion Server from Graphql-yoga
     // it's Demo version
     this.pubSub = new PubSub();
     this.pubSub.ee.setMaxListeners(99);
@@ -18,13 +18,20 @@ class App {
     this.app = new GraphQLServer({
       schema,
       context: (req) => {
+        // req.connection is WebSocket Connection
+        // req.connection.context has currentUser from index.ts
+        const { connection: { context = null } = {} } = req;
+
         return {
           req: req.request,
-          pubSub: this.pubSub
-        }
+          // PubSub is Publish & Subscription Server
+          pubSub: this.pubSub,
+          // Attach Connection Context to Resolver Context
+          context
+        };
       }
     });
-    
+
     this.middlewares();
   }
 
@@ -37,7 +44,11 @@ class App {
   };
 
   // JWT Middleware
-  private jwt = async (req, res: Response, next: NextFunction): Promise<void> => {
+  private jwt = async (
+    req,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     const token = req.get('X-JWT');
 
     if (token) {
