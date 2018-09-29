@@ -13,7 +13,7 @@ const resolvers: Resolvers = {
       async (
         _,
         args: UpdateRideStatusMutationArgs,
-        { req }
+        { req, pubSub }
       ): Promise<UpdateRideStatusResponse> => {
         const user: User = req.user;
 
@@ -29,7 +29,7 @@ const resolvers: Resolvers = {
 
               if (ride) {
                 ride.driver = user;
-                user.isTaken=  true;
+                user.isTaken = true;
                 user.save();
               }
             } else {
@@ -42,6 +42,8 @@ const resolvers: Resolvers = {
             if (ride) {
               ride.status = args.status;
               ride.save();
+
+              pubSub.publish('rideUpdate', { RideStatusSubscription: ride });
 
               return {
                 ok: true,
@@ -63,7 +65,7 @@ const resolvers: Resolvers = {
           return {
             ok: false,
             error: `You're not a driver`
-          }
+          };
         }
       }
     )
