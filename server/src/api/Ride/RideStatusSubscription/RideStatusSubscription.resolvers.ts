@@ -1,5 +1,5 @@
-import { withFilter } from 'graphql-yoga';
-import User from '../../../entities/User';
+import { withFilter } from "graphql-yoga";
+import User from "../../../entities/User";
 
 const resolvers = {
   Subscription: {
@@ -22,3 +22,4 @@ const resolvers = {
 };
 
 export default resolvers;
+
