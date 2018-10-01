@@ -1,1 +1,3 @@
-# Nuber Server
+# nuber-client
+
+React, Apollo, Typescript
