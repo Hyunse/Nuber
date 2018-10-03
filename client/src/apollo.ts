@@ -2,6 +2,7 @@ import ApolloClient, { Operation } from 'apollo-boost';
 
 const client = new ApolloClient({
   clientState: {
+    // Default State
     defaults: {
       auth: {
         __typename: 'Auth',
@@ -10,6 +11,13 @@ const client = new ApolloClient({
     },
     resolvers: {
       Mutation: {
+        /**
+         * logUserIn
+         * 
+         * @param _
+         * @param token : JWT
+         * @param cache
+         */
         logUserIn: (_, { token }, { cache }) => {
           localStorage.setItem('jwt', token);
           cache.writeData({
@@ -22,6 +30,11 @@ const client = new ApolloClient({
           });
           return null;
         },
+        /**
+         * logUserOut
+         * 
+         * @param cache
+         */
         logUserOut: (_, __, { cache }) => {
           localStorage.removeItem('jwt');
           cache.writeData({
@@ -39,11 +52,14 @@ const client = new ApolloClient({
   },
   request: async (operation: Operation) => {
     operation.setContext({
+      // Default Header
       headers: {
+        // JWT
         'X-JWT': localStorage.getItem('jwt') || ''
       }
     });
   },
+  // EndPoint
   uri: 'http://localhost:400/graphql'
 });
 
