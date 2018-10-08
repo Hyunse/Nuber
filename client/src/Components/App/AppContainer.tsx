@@ -3,7 +3,7 @@ import { graphql } from 'react-apollo';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import theme from '../../theme';
-import { ThemeProvider } from '../../typed-component';
+import { ThemeProvider } from '../../typed-components';
 import AppPresenter from './AppPresenter';
 import { IS_LOGGED_IN } from './AppQueries';
 
