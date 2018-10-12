@@ -15,12 +15,12 @@ const Container = styled.input`
 
 interface IProps {
   placeholder?: string;
-  type: string;
-  required: boolean;
+  type?: string;
+  required?: boolean;
   value: any;
 }
 
-const Input: React.SFC<IProps> = ({ placeholder = '', type = 'text', required = true, value }) => (
+const Input: React.SFC<IProps> = ({ placeholder = "", type = "text", required = true, value }) => (
   <Container
     type={type}
     required={required}
