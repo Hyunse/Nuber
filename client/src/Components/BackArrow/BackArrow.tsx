@@ -14,6 +14,12 @@ interface IProps {
   className?: string;
 }
 
+/**
+ * Back Arrow Component
+ * 
+ * @param {string} backTo : url
+ * @param {string} className : class name
+ */
 const BackArrow: React.SFC<IProps> = ({ backTo, className }) => (
   <Container className={className}>
     <Link to={backTo}>

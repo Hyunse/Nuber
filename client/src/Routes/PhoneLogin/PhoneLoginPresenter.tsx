@@ -55,6 +55,7 @@ const Button = styled.button`
 `;
 // E - Styled Component
 
+// Props Interface
 interface IProps {
   countryCode: string;
   phoneNumber: string;
@@ -64,6 +65,14 @@ interface IProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
+/**
+ * Phone Login Presenter
+ * 
+ * @param {string} countryCode : country code 
+ * @param {string} phoneNumber : phone number
+ * @param {function} onInputChange : input change
+ * @param {function} onSubmit : submit
+ */
 const PhoneLoginPresenter: React.SFC<IProps> = ({
   countryCode,
   phoneNumber,

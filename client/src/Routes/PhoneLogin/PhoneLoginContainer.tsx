@@ -5,26 +5,33 @@ import { toast } from 'react-toastify';
 import PhoneLoginPresenter from './PhoneLoginPresenter';
 import { PHONE_SIGN_IN } from './PhoneQueries';
 
+// State Interface
 interface IState {
   countryCode: string;
   phoneNumber: string;
 }
 
+/// Graphql Interface
 interface IMutationInterface {
   phoneNumber: string;
 }
 
 class PhoneSignInMutation extends Mutation<any, IMutationInterface> {}
 
+/**
+ * Phone Login Container Component
+ */
 class PhoneLoginContainer extends React.Component<
   RouteComponentProps<any>,
   IState
 > {
+  // State
   public state = {
     countryCode: '+82',
     phoneNumber: ''
   };
 
+  // Render
   public render() {
     const { countryCode, phoneNumber } = this.state;
     return (
@@ -63,6 +70,7 @@ class PhoneLoginContainer extends React.Component<
     );
   }
 
+  // Input Change
   public onInputChange: React.ChangeEventHandler<
     HTMLInputElement | HTMLSelectElement
   > = (event) => {
@@ -75,6 +83,7 @@ class PhoneLoginContainer extends React.Component<
     } as any);
   };
 
+  // Submit
   public onSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     const { countryCode, phoneNumber } = this.state;

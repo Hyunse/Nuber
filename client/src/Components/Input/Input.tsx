@@ -13,16 +13,34 @@ const Container = styled.input`
 `;
 // E - Styled Component
 
+// Props Interface
 interface IProps {
   placeholder?: string;
   type?: string;
   required?: boolean;
   value: any;
-  name?: string
+  name?: string;
   onChange: any;
 }
 
-const Input: React.SFC<IProps> = ({ placeholder = "", type = "text", required = true, value, name="", onChange }) => (
+/**
+ * Input Component
+ * 
+ * @param {string} placehoelder : input placehoelder
+ * @param {type} type : input type
+ * @param {required} required : true or false
+ * @param {string} value : input value
+ * @param {string} name : input name
+ * @param {function} onChange : input on change
+ */
+const Input: React.SFC<IProps> = ({
+  placeholder = '',
+  type = 'text',
+  required = true,
+  value,
+  name = '',
+  onChange
+}) => (
   <Container
     onChange={onChange}
     type={type}

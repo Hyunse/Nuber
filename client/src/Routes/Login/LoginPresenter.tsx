@@ -4,6 +4,7 @@ import { Link, RouteComponentProps } from 'react-router-dom';
 import bgImage from '../../images/bg.png';
 import styled from '../../typed-components';
 
+// S - Styled Component
 const Container = styled.div`
   height: 100vh;
 `;
@@ -52,7 +53,14 @@ const SocialLink = styled.span`
   color: ${(props) => props.theme.blueColor};
   font-size: 20px;
 `;
+// E - Styled Component
+
+// Props Interface
 interface IProps extends RouteComponentProps<any> {}
+
+/**
+ * Login Presenter
+ */
 const OutHomePresenter: React.SFC<IProps> = () => (
   <Container>
     <Helmet>
