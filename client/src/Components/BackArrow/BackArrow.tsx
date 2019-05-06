@@ -1,25 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from '../../typed-components';
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "../../typed-components";
 
-// S - Styled Component
 const Container = styled.div`
   transform: scale(0.8);
 `;
-// E - Styled Compoent
 
-// Props
 interface IProps {
   backTo: string;
   className?: string;
 }
 
-/**
- * Back Arrow Component
- * 
- * @param {string} backTo : url
- * @param {string} className : class name
- */
 const BackArrow: React.SFC<IProps> = ({ backTo, className }) => (
   <Container className={className}>
     <Link to={backTo}>

@@ -32,7 +32,7 @@ const resolvers: Resolvers = {
             token: null
           };
         }
-
+        
         // Check Password
         const checkPassword = await user.comparePassword(password);
 
